@@ -17,6 +17,10 @@ import sharkpunks750 from "./data/sharkpunks750.json";
 
 function App() {
   const context = useEthereum();
+
+  const formatAddress = (address: string): string =>
+    `${address.slice(0, 6)}...${address.slice(address.length - 4, address.length)}`;
+
   return (
     <Router>
       <div className="app">
@@ -28,7 +32,7 @@ function App() {
             {context.isConnected ? (
               <div className={"connected"}>
                 <div className={"dot"} />
-                <div>Connected</div>
+                <div>Connected: {formatAddress(context.address)}</div>
               </div>
             ) : (
               <button className={"login"} onClick={context.onConnect}>
